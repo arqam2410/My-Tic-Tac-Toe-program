@@ -23,6 +23,8 @@ int main ()
                         {'6', '7', '8'}};
     int winner = 5;
     int moves = 0;
+
+
     cout << "***********************\n";
     cout << "WELCOME TO TIC TAC TOE!\n";
     cout << "***********************\n";
@@ -41,6 +43,7 @@ int main ()
             cout << "Its a draw!";
             break;
         }
+
         compturn(USER, COMP, board);
         moves++;
         winner = checkwinner(USER, COMP, board);
@@ -55,6 +58,7 @@ int main ()
     }
     return 0;
 }
+
 void drawboard(char board[][3])
 {
    cout << "-----\n";
@@ -63,6 +67,7 @@ void drawboard(char board[][3])
    cout << board[2][0] << "|" << board[2][1] << "|" << board[2][2] << endl;
    cout << "-----\n";
 }
+
 void userturn(char USER, char COMP, char board[][3])
 {
     string userin;
@@ -124,6 +129,7 @@ void userturn(char USER, char COMP, char board[][3])
     {
         occupiedin = true;
     }
+    
     while(occupiedin == true)
     {
         cout << "Please Enter a non occupied position:";
@@ -185,6 +191,7 @@ void userturn(char USER, char COMP, char board[][3])
     }
     }
 }
+
 void compturn(char USER, char COMP, char board[][3])
 {
     cout << "computer's turn:\n";
@@ -276,6 +283,7 @@ void compturn(char USER, char COMP, char board[][3])
         drawboard(board);
         return;
     }
+
     //for blocking user move
     //for horizontal
     for(int i = 0 ;i < 3 ; i++)
@@ -365,12 +373,15 @@ void compturn(char USER, char COMP, char board[][3])
         drawboard(board);
         return;
     }
+
     //for random move
     //priority (middle>corners>edges)
     vector<pair<int, int>> middles, corners, edges;
+
     // Middle
     if(board[1][1] != USER && board[1][1] != COMP)
         middles.push_back({1, 1});
+
     // Corners
     if(board[0][0] != USER && board[0][0] != COMP)
         corners.push_back({0, 0});
@@ -380,6 +391,7 @@ void compturn(char USER, char COMP, char board[][3])
         corners.push_back({2, 0});
     if(board[2][2] != USER && board[2][2] != COMP)
         corners.push_back({2, 2});
+
     // Edges
     if(board[0][1] != USER && board[0][1] != COMP)
         edges.push_back({0, 1});
@@ -389,7 +401,9 @@ void compturn(char USER, char COMP, char board[][3])
         edges.push_back({1, 2});
     if(board[2][1] != USER && board[2][1] != COMP)
         edges.push_back({2, 1});
+
     srand((unsigned int)time(0));
+
     if (!middles.empty()) {
         board[middles[0].first][middles[0].second] = COMP;
         drawboard(board);
@@ -425,6 +439,7 @@ int checkwinner(char USER, char COMP, char board[][3])
             return 1;
          }
     }
+    
     //for diagonal
          if(board[0][0] == USER && board[1][1] == USER && board[2][2] == USER)
          {
@@ -434,6 +449,7 @@ int checkwinner(char USER, char COMP, char board[][3])
          {
             return 1;
          }
+         
          //for comp
     for(int j = 0; j < 3; j++)
     {
@@ -460,5 +476,7 @@ int checkwinner(char USER, char COMP, char board[][3])
          }
          return 0;
 }
+
+
 
 
